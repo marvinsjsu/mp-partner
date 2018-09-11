@@ -50,8 +50,30 @@ const selectPush = gql`
       radius: $radius, user: $user, provider: $provider,
       message: $message, api_key: $api_key
     ) {
-      response_status,
-      users
+      response_status {
+        status
+        error
+        error_code
+        notifications
+        elapsed
+      }
+      user {
+        id
+        type
+        title
+        admin
+        api_key
+        email
+        first_login
+        invite_code
+        last_login
+        picture
+        picture_large
+        provider
+        provider_id
+        username
+        zip
+      }
     }
   }
 `
