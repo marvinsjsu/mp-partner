@@ -75,7 +75,7 @@ function RecipientFilter({selectPush}) {
         </form>
       </div>
       <div>
-        <h2>Recipients</h2>
+        <h2>Who Will Get It</h2>
         <ul>
           <li>User 1</li>
         </ul>
@@ -103,8 +103,30 @@ const selectPush = gql`
       radius: $radius, user: $user, provider: $provider,
       message: $message, api_key: $api_key
     ) {
-      response_status,
-      users
+      response_status {
+        status
+        error
+        error_code
+        notifications
+        elapsed
+      }
+      user {
+        id
+        type
+        title
+        admin
+        api_key
+        email
+        first_login
+        invite_code
+        last_login
+        picture
+        picture_large
+        provider
+        provider_id
+        username
+        zip
+      }
     }
   }
 `
@@ -113,7 +135,20 @@ export default graphql(selectPush, {
   props: ({ mutate }) => ({
     selectPush: (logged_in_user, zip, title, rep, send, platform, state, radius, user, provider, message, api_key) =>
       mutate({
-        variables: { logged_in_user, zip, title, rep, send, platform, state, radius, user, provider, message, api_key },
+        variables: {
+          logged_in_user: logged_in_user,
+          zip: zip,
+          title: title,
+          rep: rep,
+          send: send,
+          platform: platform,
+          state: state,
+          radius: radius,
+          user: user,
+          provider: provider,
+          message: message,
+          api_key: api_key
+        },
 
       })
   })
