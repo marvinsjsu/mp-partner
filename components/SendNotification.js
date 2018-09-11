@@ -82,7 +82,20 @@ export default graphql(selectPush, {
   props: ({ mutate }) => ({
     selectPush: (logged_in_user, zip, title, rep, send, platform, state, radius, user, provider, message, api_key) =>
       mutate({
-        variables: { logged_in_user, zip, title, rep, send, platform, state, radius, user, provider, message, api_key },
+        variables: {
+          logged_in_user: logged_in_user,
+          zip: zip,
+          title: title,
+          rep: rep,
+          send: send,
+          platform: platform,
+          state: state,
+          radius: radius,
+          user: user,
+          provider: provider,
+          message: message,
+          api_key: api_key
+        },
 
       })
   })
